@@ -5,23 +5,27 @@ import java.util.ArrayList;
 public class Client {
 
 	public static ConsistentHash<String> consistentHash;
+	private static CacheServiceInterface cache1 = new DistributedCacheService("http://localhost:3000");
+	private static CacheServiceInterface cache2 = new DistributedCacheService("http://localhost:3001");
+	private static CacheServiceInterface cache3 = new DistributedCacheService("http://localhost:3002");
+	
 	public static CacheServiceInterface getCacheServer(String value) throws Exception
 	{
 		String bucket = consistentHash.get(value);
 		if(bucket.equalsIgnoreCase("cache1"))
 		{
 			System.out.println("Hitting Server: http://localhost:3000 ");
-			return new DistributedCacheService("http://localhost:3000");
+			return cache1;
 		}
 		else if(bucket.equalsIgnoreCase("cache2"))
 		{
 			System.out.println("Hitting Server: http://localhost:3001 ");
-			return new DistributedCacheService("http://localhost:3001");
+			return cache2;
 		}
 		else
 		{
 			System.out.println("Hitting Server: http://localhost:3002 ");
-			return new DistributedCacheService("http://localhost:3002");
+			return cache3;
 		}
 		
 	}

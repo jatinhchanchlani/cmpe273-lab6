@@ -22,17 +22,4 @@ public class HashFunction {
         return sb.toString();
 	}
 	
-	public static void main(String[] args) throws Exception {
-		ArrayList<String> servernames = new ArrayList<String>();
-		servernames.add("Cache3");
-		servernames.add("Cache1");
-		servernames.add("Cache2");
-		
-		
-		ConsistentHash<String> consistentHash = new ConsistentHash<String>(30, servernames);
-		
-		System.out.println(consistentHash.get("6"));
-		int i =1;
-		System.out.println(String.valueOf(i));
-	}
 }
